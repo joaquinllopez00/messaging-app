@@ -1,3 +1,5 @@
+import "../styles/chatMessage.css";
+
 export function ChatMessage(props) {
   const { text, uid, photoUrl } = props.message;
   const auth = props.auth;

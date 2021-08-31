@@ -1,0 +1,23 @@
+.groups {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #000e15e9;
+  z-index: 1000;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgb(218, 218, 218);
+  padding: 1rem;
+}
+
+.group-title {
+  color: rgb(171, 171, 171);
+  text-decoration: none;
+}
+
+.group-title:hover {
+  color: rgb(218, 218, 218);
+}

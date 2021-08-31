@@ -4,8 +4,9 @@ import { useState, useRef } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
-
 import { useAuthState } from "react-firebase-hooks/auth";
+
+import { Groups } from "./components/Groups";
 import { ChatRoom } from "./components/ChatRoom";
 
 if (!firebase.apps.length) {
@@ -31,7 +32,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header"></header>
-
+      <Groups firestore={firestore} />
       <section>{user ? <ChatRoom auth={auth} firebase={firebase} firestore={firestore} /> : <SignIn />}</section>
     </div>
   );
