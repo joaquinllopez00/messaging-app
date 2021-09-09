@@ -10,10 +10,9 @@ export function ChatRoom(props) {
 
   const messagesRef = props.firestore.collection("messages");
 
-  const query = messagesRef.where("group", "==", "general").limit(25);
+  const query = messagesRef.where("group", "==", `${window.location.pathname.slice(1)}`).limit(25);
 
   const [messages] = useCollectionData(query, { idField: "id" });
-  console.log(messages);
   const [formValue, setFormValue] = useState("");
   const [options, setOptions] = useState(false);
 

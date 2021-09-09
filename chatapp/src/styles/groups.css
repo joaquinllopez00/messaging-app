@@ -10,7 +10,8 @@
   flex-direction: column;
   align-items: center;
   color: rgb(218, 218, 218);
-  padding: 1rem;
+  padding: 1.5rem;
+  transition: all 0.2s ease-in-out;
 }
 
 .group-title {
@@ -20,4 +21,30 @@
 
 .group-title:hover {
   color: rgb(218, 218, 218);
+}
+
+.arrow-right {
+  transform: rotate(-90deg);
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.arrow-left {
+  transform: rotate(90deg);
+  position: fixed;
+  top: 10px;
+  left: 10px;
+}
+
+svg {
+  color: white;
+  cursor: pointer;
+  font-size: 20px !important;
+  transition: all 0.2s ease-in-out;
+}
+
+svg:hover {
+  color: rgb(218, 218, 218);
+  font-size: 22px !important;
 }
