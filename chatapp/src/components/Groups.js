@@ -1,24 +1,45 @@
 import React, { useEffect, useState } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUp, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 
 import "../styles/groups.css";
 
 export function Groups(props) {
   const groupsRef = props.firestore.collection("groups");
   const [groups] = useCollectionData(groupsRef, { idField: "id" });
-  const [toggled, setToggled] = useState(false);
+  const [toggled, setToggled] = useState(true);
   const [urlPath, setUrlPath] = useState(window.location.pathname);
+  const [width, changeWidth] = useState(window.innerWidth);
+  const [desktop, setDesktop] = useState(true);
+  const detectChange = (width, changeWidth) => {
+    if (window.innerWidth > 720) {
+      setToggled(true);
+      setDesktop(true);
+    } else {
+      setDesktop(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", detectChange);
+    return () => {
+      window.removeEventListener("resize", detectChange);
+    };
+  }, [width]);
+
   return (
     <>
       {toggled ? (
         <div className="groups">
-          <FontAwesomeIcon
-            icon={faArrowUp}
-            className={toggled ? "arrow-right" : "arrow-left"}
-            onClick={() => setToggled(!toggled)}
-          />
+          {desktop === false && (
+            <FontAwesomeIcon
+              icon={faArrowUp}
+              className={toggled ? "arrow-right" : "arrow-left"}
+              onClick={() => setToggled(!toggled)}
+            />
+          )}
+
           <h1>GROUPS</h1>
           {groups &&
             groups.map((group) => {
@@ -30,7 +51,11 @@ export function Groups(props) {
             })}
         </div>
       ) : (
-        <FontAwesomeIcon icon={faArrowUp} className="arrow-left" onClick={() => setToggled(!toggled)} />
+        <>
+          {desktop === false && (
+            <FontAwesomeIcon icon={faArrowUp} className="arrow-left" onClick={() => setToggled(!toggled)} />
+          )}
+        </>
       )}
     </>
   );

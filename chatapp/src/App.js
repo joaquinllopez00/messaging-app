@@ -32,8 +32,17 @@ function App() {
   return (
     <div className="App">
       <header className="App-header"></header>
-      <Groups firestore={firestore} />
-      <section>{user ? <ChatRoom auth={auth} firebase={firebase} firestore={firestore} /> : <SignIn />}</section>
+
+      <section id="main-content">
+        {user ? (
+          <>
+            <Groups firestore={firestore} />
+            <ChatRoom auth={auth} firebase={firebase} firestore={firestore} />
+          </>
+        ) : (
+          <SignIn />
+        )}
+      </section>
     </div>
   );
 }
