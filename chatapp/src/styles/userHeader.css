@@ -1,0 +1,21 @@
+.user-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.user-header p {
+  font-size: 20px;
+}
+
+.sent-header {
+  justify-content: flex-end;
+}
+
+.sent-header p {
+  margin-right: 10px;
+}
+
+.received-header p {
+  margin-left: 10px;
+}

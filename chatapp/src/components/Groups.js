@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp, faWindowClose } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUp, faWindowClose, faHashtag } from "@fortawesome/free-solid-svg-icons";
 
 import "../styles/groups.css";
 
@@ -40,11 +40,15 @@ export function Groups(props) {
             />
           )}
 
-          <h1>GROUPS</h1>
+          <h1>Info</h1>
+          <div className="info-tag">
+            <FontAwesomeIcon icon={faHashtag} onClick={() => setToggled(!toggled)} />
+            <p>'S</p>
+          </div>
           {groups &&
-            groups.map((group) => {
+            groups.map((group, id) => {
               return (
-                <a className="group-title" href={`/${group.title}`}>
+                <a className="group-title" href={`/${group.title}`} key={id}>
                   <p>#{group.title}</p>
                 </a>
               );

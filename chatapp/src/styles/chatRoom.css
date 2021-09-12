@@ -9,28 +9,39 @@
   position: relative;
   height: 100%;
   min-height: 90vh;
+  position: relative;
 }
 
 form {
   position: fixed;
   bottom: 0px;
   width: 60%;
-  background-color: red;
-  height: 50px;
+
+  height: 60px;
   display: flex;
   font-size: 1.5rem;
   border-radius: 10px 10px 0px 0px;
   overflow: hidden;
 }
 
-form input {
+form textarea {
   outline: none;
   border: none;
   width: 80%;
+  overflow: scroll;
+  min-height: 58px;
+  resize: none;
+  overflow: scroll;
+  outline-width: none;
 }
 
 form button {
   border: none;
   width: 20%;
   background-color: #00a6ff;
+}
+
+header {
+  position: fixed;
+  top: 10px;
 }

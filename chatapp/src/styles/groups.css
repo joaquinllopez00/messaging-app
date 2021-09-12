@@ -1,11 +1,14 @@
 .groups {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
   background-color: #000e15e9;
   z-index: 1000;
   width: 100px;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 2rem;
   color: rgb(218, 218, 218);
   transition: all 0.2s ease-in-out;
 }
@@ -52,4 +55,9 @@ svg {
 svg:hover {
   color: rgb(218, 218, 218);
   font-size: 22px !important;
+}
+
+.info-tag {
+  display: flex;
+  align-items: center;
 }
