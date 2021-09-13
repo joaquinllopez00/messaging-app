@@ -10,7 +10,6 @@ export function ChatMessage(props) {
   return (
     <div className={`message ${messageClass}`}>
       <UserHeader user={auth.currentUser} classProp={`${messageClass}`} />
-
       <p>{text}</p>
     </div>
   );

@@ -15,13 +15,18 @@
 form {
   position: fixed;
   bottom: 0px;
-  width: 60%;
-
-  height: 60px;
+  width: 61.3%;
+  height: 80px;
   display: flex;
   font-size: 1.5rem;
   border-radius: 10px 10px 0px 0px;
   overflow: hidden;
+}
+
+.error {
+  border-top: 1px solid red;
+  border-right: 1px solid red;
+  border-left: 1px solid red;
 }
 
 form textarea {
@@ -31,8 +36,25 @@ form textarea {
   overflow: scroll;
   min-height: 58px;
   resize: none;
-  overflow: scroll;
-  outline-width: none;
+  border-style: none;
+  border-color: transparent;
+  overflow: auto;
+  font-family: var(--font-stack);
+  padding: 0.5rem;
+}
+
+textarea::-webkit-scrollbar {
+  width: 1em;
+}
+
+textarea::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(8, 0, 159, 0.3);
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: rgb(0, 0, 225);
+
+  outline: 1px solid rgb(0, 112, 225);
 }
 
 form button {

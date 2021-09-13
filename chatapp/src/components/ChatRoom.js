@@ -2,6 +2,7 @@ import "../styles/chatRoom.css";
 import { useState, useRef } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { ChatMessage } from "./ChatMessage";
+import { lengthChecker, addMessage } from "../hooks";
 
 export function ChatRoom(props) {
   const location = window.location.pathname.slice(1);
@@ -12,22 +13,17 @@ export function ChatRoom(props) {
 
   const [messages] = useCollectionData(query, { idField: "id" });
   const [formValue, setFormValue] = useState("");
+  const [messageInfo, setMessageInfo] = useState("");
   const [options, setOptions] = useState(false);
 
   const sendMessage = async (e) => {
     e.preventDefault();
-    if (formValue.length === 0) {
+    if (formValue.length === 0 || formValue.length > 360) {
+      lengthChecker(formValue, setMessageInfo);
       return;
     }
     const { uid, photoURL, displayName } = props.auth.currentUser;
-    await messagesRef.add({
-      text: formValue,
-      createdAt: props.firebase.firestore.FieldValue.serverTimestamp(),
-      group: location,
-      uid,
-      photoURL,
-      displayName,
-    });
+    await addMessage(messagesRef, formValue, props.firebase.firestore, location, uid, photoURL, displayName);
     setFormValue("");
     bottom.current.scrollIntoView({ behavior: "smooth" });
   };
@@ -57,7 +53,7 @@ export function ChatRoom(props) {
         </div>
         <div ref={bottom}></div>
       </main>
-      <form onSubmit={sendMessage}>
+      <form onSubmit={sendMessage} className={`${messageInfo}`}>
         <textarea type="text" value={formValue} onChange={(e) => messageMonitor(e.target)} />
         <button type="submit">Send</button>
       </form>
