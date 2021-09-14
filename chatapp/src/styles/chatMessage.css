@@ -1,7 +1,6 @@
 .message {
-  width: 96.5%;
   padding: 1rem;
-  margin: 1rem 0rem;
+  margin: 1rem 1.5rem;
   border-radius: 10px;
   text-align: left;
 }
@@ -18,12 +17,12 @@
 
 .sent {
   text-align: left;
-  background-color: rgb(74, 74, 250);
+  background: linear-gradient(to left, var(--recieved-blue), var(--user-blue));
   color: white;
 }
 
 .received {
   text-align: right;
-  background-color: rgb(0, 0, 55);
+  background: linear-gradient(to left, var(--recieved-blue), rgb(0, 0, 55));
   color: white;
 }

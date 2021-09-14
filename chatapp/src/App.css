@@ -3,6 +3,15 @@
   --heavy-fontWieght: 400;
   --normal-fontWieght: 200;
   --light-fontWieght: 100;
+  --user-blue: rgb(74, 74, 250);
+  --recieved-blue: rgb(19, 19, 121);
+  --background-color: #1c1d61;
+  --background-highLight: #c9c9c9;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 h1,
@@ -17,20 +26,13 @@ span {
   font-family: var(--font-stack);
 }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .App {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #000e15;
+  background-color: var(--background-color);
 }
 
 #main-content {

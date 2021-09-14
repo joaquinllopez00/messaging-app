@@ -2,6 +2,7 @@ import "../styles/chatRoom.css";
 import { useState, useRef } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { ChatMessage } from "./ChatMessage";
+import { GroupHeader } from "./GroupHeader";
 import { lengthChecker, addMessage } from "../hooks";
 
 export function ChatRoom(props) {
@@ -39,9 +40,7 @@ export function ChatRoom(props) {
 
   return (
     <div className="chat-room">
-      <header>
-        <h3>{`${location}`}</h3>
-      </header>
+      <GroupHeader title={location} />
       <main>
         <div>
           {messages &&
@@ -49,9 +48,11 @@ export function ChatRoom(props) {
               .sort((el1, el2) => {
                 return el1.createdAt - el2.createdAt;
               })
-              .map((msg) => <ChatMessage auth={props.auth} key={msg.id} message={msg} />)}
+              .map((msg, idx) => (
+                <ChatMessage auth={props.auth} key={msg.id} message={msg} style={idx === 0 ? "margin-top: 4rem" : ""} />
+              ))}
         </div>
-        <div ref={bottom}></div>
+        <div id="bottom" ref={bottom}></div>
       </main>
       <form onSubmit={sendMessage} className={`${messageInfo}`}>
         <textarea type="text" value={formValue} onChange={(e) => messageMonitor(e.target)} />
