@@ -3,11 +3,17 @@
   margin: 1rem 1.5rem;
   border-radius: 10px;
   text-align: left;
+  font-family: var(--font-stack);
+}
+
+.message > div {
 }
 
 .message p {
   word-break: break-all;
   white-space: normal;
+  display: inline-block;
+  font-family: var(--font-stack);
 }
 
 .message img {

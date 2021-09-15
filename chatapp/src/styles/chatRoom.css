@@ -5,12 +5,13 @@
   background-color: var(--background-highLight);
   margin: 0rem 1.5rem 0rem 1.5rem;
   position: relative;
-  min-height: 90vh;
+
   /* to fixed header to chat-room */
   /* transform: translateZ(0); */
 }
 
 main {
+  min-height: 100vh;
   width: 100%;
   position: relative;
 }
@@ -30,6 +31,14 @@ form {
   font-size: 1.5rem;
   border-radius: 10px 10px 0px 0px;
   margin: 0rem 1.5rem;
+}
+
+form > div > button {
+  margin: 0.3rem 0rem;
+}
+
+form > div > button > svg {
+  color: rgb(25, 25, 25);
 }
 
 .error {
@@ -80,12 +89,13 @@ form button {
   width: 20%;
   cursor: pointer;
   color: #fff;
-  background: linear-gradient(to right, var(--user-blue) 0%, rgb(36, 36, 199) 40%, var(--recieved-blue) 90%);
+  background-color: rgb(25, 25, 25);
+  /* background: linear-gradient(to right, var(--user-blue) 0%, rgb(36, 36, 199) 40%, var(--recieved-blue) 90%); */
 }
 
 .form-options {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   position: absolute;
   height: 25px;
   top: 0;
@@ -108,9 +118,16 @@ form button {
   color: black;
 }
 
-.bold {
+form > div > div > p {
   display: inline;
-  font-weight: bold;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.italics {
+  font-style: italic;
 }
 
 #bottom {

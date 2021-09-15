@@ -4,7 +4,7 @@
   left: 0;
   bottom: 0;
   background-color: #000e15e9;
-  z-index: 1000;
+  z-index: 99999;
   width: 20%;
   min-width: 175px;
   display: flex;
@@ -41,7 +41,7 @@
 
 .arrow-left {
   transform: rotate(90deg);
-  position: absolute;
+  position: fixed;
   top: 10px;
   left: 10px;
 }

@@ -13,7 +13,7 @@ export function Groups(props) {
   const [width, changeWidth] = useState(window.innerWidth);
   const [desktop, setDesktop] = useState(true);
   const detectChange = (width, changeWidth) => {
-    if (window.innerWidth > 720) {
+    if (window.innerWidth > 868) {
       setToggled(true);
       setDesktop(true);
     } else {

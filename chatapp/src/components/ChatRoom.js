@@ -4,6 +4,8 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import { ChatMessage } from "./ChatMessage";
 import { GroupHeader } from "./GroupHeader";
 import { lengthChecker, addMessage, editHtml, cEMoveCursorToEnd } from "../hooks";
+import { faPaperPlane, faBold, faItalic } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export function ChatRoom(props) {
   const location = window.location.pathname.slice(1);
@@ -22,21 +24,22 @@ export function ChatRoom(props) {
 
   let fnObj = {
     setOptions,
-    textOption,
     setTextOption,
+    textOption,
   };
 
   const sendMessage = async (e) => {
     e.preventDefault();
-    setFormValue(formData.current.innerHTML);
-    console.log(formValue, "formValue");
-    if (formValue.length === 0 || formValue.length > 360) {
-      lengthChecker(formValue, setMessageInfo);
-      return;
-    }
+    let formVal = formData.current;
+    // if (formValue.length === 0 || formValue.length > 360) {
+    //   lengthChecker(formValue, setMessageInfo);
+    //   return;
+    // }
     const { uid, photoURL, displayName } = props.auth.currentUser;
-    await addMessage(messagesRef, formValue, props.firebase.firestore, location, uid, photoURL, displayName);
-    setFormValue("");
+
+    await addMessage(messagesRef, formVal, props.firebase.firestore, location, uid, photoURL, displayName);
+    formVal.innerHTML = "";
+    setTextOption("");
     bottom.current.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -45,7 +48,7 @@ export function ChatRoom(props) {
     let messageSplit = formData.current.innerText.split(" ");
     let finalWrd = messageSplit[messageSplit.length - 1];
     // console.log(messageSplit);
-    textOption !== "" && editHtml(fnObj, formData, messageSplit, textOption, e);
+    textOption !== "" && editHtml(fnObj, formData, messageSplit, "editing", e);
   };
 
   return (
@@ -69,21 +72,32 @@ export function ChatRoom(props) {
           <button
             onClick={(e) => {
               textOption === "bold"
-                ? editHtml(fnObj, formData, formData.current.innerHTML.split(" "), "")
+                ? editHtml(fnObj, formData, formData.current.innerHTML.split(" "), "text")
                 : editHtml(fnObj, formData, formData.current.innerHTML.split(" "), "bold");
             }}
             ref={bold}
             type="button"
           >
-            Bold
+            <FontAwesomeIcon icon={faBold} />
           </button>
-          <button>Italics</button>
-          <button>Strong</button>
+          <button
+            onClick={(e) => {
+              textOption === "italics"
+                ? editHtml(fnObj, formData, formData.current.innerHTML.split(" "), "text")
+                : editHtml(fnObj, formData, formData.current.innerHTML.split(" "), "italics");
+            }}
+            ref={bold}
+            type="button"
+          >
+            <FontAwesomeIcon icon={faItalic} />
+          </button>
         </div>
         <div className="form-subcontainer">
           <div type="text" ref={formData} onKeyUp={(e) => messageMonitor(e)} contentEditable></div>
         </div>
-        <button type="submit">Send</button>
+        <button type="submit">
+          <FontAwesomeIcon icon={faPaperPlane} />
+        </button>
       </form>
     </div>
   );

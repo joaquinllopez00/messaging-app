@@ -7,8 +7,12 @@ export const lengthChecker = (val, func) => {
 };
 
 export const addMessage = async (ref, val, store, loc, uid, photoURL, displayName) => {
+  val.childNodes.forEach((el) => {
+    el.contentEditable = false;
+  });
+
   await ref.add({
-    text: val,
+    text: val.innerHTML,
     createdAt: store.FieldValue.serverTimestamp(),
     group: loc,
     uid,
@@ -21,27 +25,26 @@ const acceptableKeys = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Back
 export const editHtml = ({ setTextOption, setOptions, textOption }, formData, parsedMess, option, e = "") => {
   // textOption !== "" ? setOptions(true) : setOptions(false);
   let data = formData.current;
-  console.log(textOption);
-  let lastChild = data.childNodes[data.childNodes.length - 1];
-  setTextOption(option);
+  console.log(option);
+  // let lastChild = data.childNodes[data.childNodes.length - 1];
 
-  if (lastChild.nodeName !== "P") {
-    // setLastTextEl(parsedMess.length - 1);
-    let currentHTML =
-      data.innerHTML +
-      ` <p contenteditable='true' tabindex='0' class=${textOption !== "" ? `${textOption}` : `${option}`}>/</p>`;
+  if (option !== "editing") {
+    setTextOption(option);
+    let currentHTML = data.innerHTML + ` <p contenteditable='true' tabindex='0' class=${`${option}`}>/</p>`;
     data.innerHTML = currentHTML;
-    let elArr = document.querySelectorAll(`${textOption !== "" ? `.${textOption}` : `.${option}`}`);
+    let elArr = document.querySelectorAll(`.${option}`);
     let targetEl = elArr[elArr.length - 1];
-    setTimeout(() => {
-      targetEl.focus();
-    }, 0);
+    // setTimeout(() => {
+    //   targetEl.focus();
+    // }, 0);
   } else {
-    let elArr = document.querySelectorAll(`${textOption !== "" ? `.${textOption}` : `.${option}`}`);
+    console.log(textOption);
+    let elArr = document.querySelectorAll(`.${textOption}`);
     let targetEl = elArr[elArr.length - 1];
+    console.log(elArr, "elArr");
+    console.log(targetEl, "target El");
     targetEl.innerText = targetEl.innerText.replace("/", "");
   }
-
   cEMoveCursorToEnd(data);
   acceptableKeys.includes(e.code) && setTextOption("");
 };
