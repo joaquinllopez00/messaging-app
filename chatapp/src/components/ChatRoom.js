@@ -68,6 +68,9 @@ export function ChatRoom(props) {
         <div id="bottom" ref={bottom}></div>
       </main>
       <form onSubmit={sendMessage} className={`${messageInfo}`}>
+        <div className="form-subcontainer">
+          <div type="text" ref={formData} onKeyUp={(e) => messageMonitor(e)} contentEditable></div>
+        </div>
         <div className={`form-options ${options && "form-options-visible"}`}>
           <button
             onClick={(e) => {
@@ -91,13 +94,10 @@ export function ChatRoom(props) {
           >
             <FontAwesomeIcon icon={faItalic} />
           </button>
+          <button type="submit">
+            <FontAwesomeIcon icon={faPaperPlane} />
+          </button>
         </div>
-        <div className="form-subcontainer">
-          <div type="text" ref={formData} onKeyUp={(e) => messageMonitor(e)} contentEditable></div>
-        </div>
-        <button type="submit">
-          <FontAwesomeIcon icon={faPaperPlane} />
-        </button>
       </form>
     </div>
   );
