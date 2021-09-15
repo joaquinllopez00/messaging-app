@@ -5,8 +5,8 @@
   --light-fontWieght: 100;
   --user-blue: rgb(74, 74, 250);
   --recieved-blue: rgb(19, 19, 121);
-  --background-color: #1c1d61;
-  --background-highLight: #c9c9c9;
+  --background-color: rgb(29, 29, 29);
+  --background-highLight: #373737;
 }
 * {
   margin: 0;

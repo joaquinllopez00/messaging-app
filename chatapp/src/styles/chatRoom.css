@@ -24,11 +24,11 @@ form {
   bottom: 0px;
   left: 0;
   right: 0px;
-  height: 80px;
+  height: 100px;
   display: flex;
+
   font-size: 1.5rem;
   border-radius: 10px 10px 0px 0px;
-  overflow: hidden;
   margin: 0rem 1.5rem;
 }
 
@@ -38,32 +38,42 @@ form {
   border-left: 1px solid red;
 }
 
-form textarea {
+.form-subcontainer {
   outline: none;
   border: none;
-  width: 80%;
-  overflow: scroll;
-  min-height: 58px;
-  resize: none;
-  border-style: none;
-  border-color: transparent;
+  width: 100%;
+  background-color: #fff;
+  cursor: text;
+  display: flex;
+  flex-direction: column;
   overflow: auto;
   font-family: var(--font-stack);
   padding: 0.5rem;
+  font-size: 1rem;
+  z-index: 5;
 }
 
-textarea::-webkit-scrollbar {
+.form-subcontainer > div {
+  min-height: 80px;
+}
+
+.form-subcontainer :focus {
+  border: none;
+  outline: none;
+}
+
+/* .form-subcontainer > div::-webkit-scrollbar {
   width: 1em;
 }
 
-textarea::-webkit-scrollbar-track {
+.form-subcontainer > div::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(8, 0, 159, 0.3);
 }
 
-textarea::-webkit-scrollbar-thumb {
+.form-subcontainer > div::-webkit-scrollbar-thumb {
   background-color: var(--user-blue);
   outline: 1px solid var(--user-blue);
-}
+} */
 
 form button {
   border: none;
@@ -71,6 +81,36 @@ form button {
   cursor: pointer;
   color: #fff;
   background: linear-gradient(to right, var(--user-blue) 0%, rgb(36, 36, 199) 40%, var(--recieved-blue) 90%);
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  height: 25px;
+  top: 0;
+  z-index: -10;
+  font-size: 18px;
+  align-items: center;
+  overflow: hidden;
+  width: 83.4%;
+  background-color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+.form-options-visible {
+  top: -25px;
+}
+
+.form-options button {
+  border: none;
+  background: none;
+  color: black;
+}
+
+.bold {
+  display: inline;
+  font-weight: bold;
 }
 
 #bottom {

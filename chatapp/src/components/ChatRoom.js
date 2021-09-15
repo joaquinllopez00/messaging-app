@@ -3,11 +3,13 @@ import { useState, useRef } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { ChatMessage } from "./ChatMessage";
 import { GroupHeader } from "./GroupHeader";
-import { lengthChecker, addMessage } from "../hooks";
+import { lengthChecker, addMessage, editHtml, cEMoveCursorToEnd } from "../hooks";
 
 export function ChatRoom(props) {
   const location = window.location.pathname.slice(1);
   const bottom = useRef();
+  const formData = useRef();
+  const bold = useRef();
 
   const messagesRef = props.firestore.collection("messages");
   const query = messagesRef.where("group", "==", `${window.location.pathname.slice(1)}`).limit(25);
@@ -15,10 +17,19 @@ export function ChatRoom(props) {
   const [messages] = useCollectionData(query, { idField: "id" });
   const [formValue, setFormValue] = useState("");
   const [messageInfo, setMessageInfo] = useState("");
-  const [options, setOptions] = useState(false);
+  const [options, setOptions] = useState(true);
+  const [textOption, setTextOption] = useState("");
+
+  let fnObj = {
+    setOptions,
+    textOption,
+    setTextOption,
+  };
 
   const sendMessage = async (e) => {
     e.preventDefault();
+    setFormValue(formData.current.innerHTML);
+    console.log(formValue, "formValue");
     if (formValue.length === 0 || formValue.length > 360) {
       lengthChecker(formValue, setMessageInfo);
       return;
@@ -30,12 +41,11 @@ export function ChatRoom(props) {
   };
 
   const messageMonitor = (e) => {
-    setFormValue(e.value);
-    let messageSplit = e.value.split(" ");
-    let finalChar = messageSplit[messageSplit.length - 1];
-    if (finalChar === "/") {
-      setOptions(true);
-    }
+    // setFormValue(formData.current.innerText);
+    let messageSplit = formData.current.innerText.split(" ");
+    let finalWrd = messageSplit[messageSplit.length - 1];
+    // console.log(messageSplit);
+    textOption !== "" && editHtml(fnObj, formData, messageSplit, textOption, e);
   };
 
   return (
@@ -55,7 +65,24 @@ export function ChatRoom(props) {
         <div id="bottom" ref={bottom}></div>
       </main>
       <form onSubmit={sendMessage} className={`${messageInfo}`}>
-        <textarea type="text" value={formValue} onChange={(e) => messageMonitor(e.target)} />
+        <div className={`form-options ${options && "form-options-visible"}`}>
+          <button
+            onClick={(e) => {
+              textOption === "bold"
+                ? editHtml(fnObj, formData, formData.current.innerHTML.split(" "), "")
+                : editHtml(fnObj, formData, formData.current.innerHTML.split(" "), "bold");
+            }}
+            ref={bold}
+            type="button"
+          >
+            Bold
+          </button>
+          <button>Italics</button>
+          <button>Strong</button>
+        </div>
+        <div className="form-subcontainer">
+          <div type="text" ref={formData} onKeyUp={(e) => messageMonitor(e)} contentEditable></div>
+        </div>
         <button type="submit">Send</button>
       </form>
     </div>

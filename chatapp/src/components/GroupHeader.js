@@ -5,12 +5,9 @@ export function GroupHeader(props) {
   const [headerToggled, setHeaderToggled] = useState(false);
 
   const monitorScroll = () => {
-    console.log(window.scrollY, headerToggled);
     if (window.scrollY > 80 && headerToggled === false) {
-      console.log("setting true");
       return setHeaderToggled(!headerToggled);
     } else if (window.scrollY < 80 && headerToggled) {
-      console.log("setting falase");
       return setHeaderToggled(!headerToggled);
     }
   };
