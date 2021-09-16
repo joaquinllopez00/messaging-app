@@ -16,19 +16,23 @@
   font-family: var(--font-stack);
 }
 
+.message > div:nth-child(2) {
+  margin: -18px 0px 0px 56px;
+}
+
 .message img {
-  height: 50px;
-  border-radius: 50%;
+  height: 45px;
+  border-radius: 16px;
 }
 
 .sent {
   text-align: left;
-  background: linear-gradient(to left, var(--recieved-blue), var(--user-blue));
-  color: white;
+  /* background: linear-gradient(to left, var(--recieved-blue), var(--user-blue)); */
+  color: black;
 }
 
 .received {
-  text-align: right;
-  background: linear-gradient(to left, var(--recieved-blue), rgb(0, 0, 55));
+  text-align: left;
+  /* background: linear-gradient(to left, var(--recieved-blue), rgb(0, 0, 55)); */
   color: white;
 }

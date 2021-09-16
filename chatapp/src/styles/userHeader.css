@@ -1,11 +1,12 @@
 .user-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
 }
 
 .user-header p {
   font-size: 20px;
+  margin-left: 10px;
 }
 
 .sent-header {
