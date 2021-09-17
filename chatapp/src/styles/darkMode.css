@@ -1,0 +1,35 @@
+.dM-container {
+  position: fixed;
+  width: 60px;
+  height: 30px;
+  right: 6%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem;
+  border-radius: 30px;
+  align-items: center;
+  background-color: aliceblue;
+}
+
+.sun {
+  color: white;
+}
+
+.moon {
+  color: #293b48;
+}
+
+.dM-switch {
+  position: absolute;
+  background-color: aquamarine;
+  height: 30px;
+  width: 30px;
+  border-radius: 30px;
+  left: 0;
+  cursor: pointer;
+}
+
+.dark-mode {
+  right: 0;
+  left: auto;
+}

@@ -1,6 +1,6 @@
 .group-header {
   position: sticky;
-  top: 0px;
+  top: 80px;
 
   z-index: 9999;
   height: 100px;
