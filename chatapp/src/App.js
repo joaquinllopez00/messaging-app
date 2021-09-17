@@ -8,6 +8,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 import { Groups } from "./components/Groups";
 import { ChatRoom } from "./components/ChatRoom";
+import { Nav } from "./components/Nav";
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -31,6 +32,7 @@ function App() {
 
   return (
     <div className="App">
+      <Nav />
       <section id="main-content">
         {user ? (
           <>
