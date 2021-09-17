@@ -5,9 +5,9 @@ export function GroupHeader(props) {
   const [headerToggled, setHeaderToggled] = useState(false);
 
   const monitorScroll = () => {
-    if (window.scrollY > 80 && headerToggled === false) {
+    if (window.scrollY > 150 && headerToggled === false) {
       return setHeaderToggled(!headerToggled);
-    } else if (window.scrollY < 80 && headerToggled) {
+    } else if (window.scrollY < 90 && headerToggled) {
       return setHeaderToggled(!headerToggled);
     }
   };
@@ -23,7 +23,10 @@ export function GroupHeader(props) {
 
   return (
     <header className={`group-header ${headerToggled ? "group-toggled" : ""}`}>
-      <h3>{props.title}</h3>
+      <h2>
+        {headerToggled && "#"}
+        {props.title}
+      </h2>
       {headerToggled === false && <p>Just a place where people go to hangout</p>}
     </header>
   );
