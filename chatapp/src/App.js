@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useRef } from "react";
+import { useState, useRef, createContext } from "react";
 
 import firebase from "firebase/app";
 import "firebase/firestore";
@@ -23,27 +23,53 @@ if (!firebase.apps.length) {
 } else {
   firebase.app(); // if already initialized, use that one
 }
-
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
+export const ModeContext = createContext({
+  darkMode: false,
+  setDarkMode: () => {},
+});
+
+let darkMode = "";
+let textColor = "";
+let inputColor = "";
+// textColor: "rgb(230,230,230)",
+// inputColor: "rgb(65,65,65)",
+// const darkModeStyles = {
+//   // eslint-disable-next-line no-undef
+//   backgroundColor: "rgb(45,45,45)",
+//   color: !darkMode && "rgb(230,230,230)",
+// };
+
+const darkModeStyles = {
+  // eslint-disable-next-line no-undef
+  backgroundColor: "rgb(45,45,45)",
+  color: "rgb(230,230,230)",
+  chatColor: "rgb(220,220,220)",
+};
+
 function App() {
   const [user] = useAuthState(auth);
+  const [darkMode, setDarkMode] = useState(false);
+  const value = { darkMode, setDarkMode, darkModeStyles };
 
   return (
-    <div className="App">
-      <Nav />
-      <section id="main-content">
-        {user ? (
-          <>
-            <Groups firestore={firestore} />
-            <ChatRoom auth={auth} firebase={firebase} firestore={firestore} />
-          </>
-        ) : (
-          <SignIn />
-        )}
-      </section>
-    </div>
+    <ModeContext.Provider value={value}>
+      <div className="App">
+        <Nav />
+        <section id="main-content">
+          {user ? (
+            <>
+              <Groups firestore={firestore} />
+              <ChatRoom auth={auth} firebase={firebase} firestore={firestore} />
+            </>
+          ) : (
+            <SignIn />
+          )}
+        </section>
+      </div>
+    </ModeContext.Provider>
   );
 }
 

@@ -12,11 +12,11 @@
 }
 
 .sun {
-  color: white;
+  color: #293b48;
 }
 
 .moon {
-  color: #293b48;
+  color: rgb(30, 30, 30);
 }
 
 .dM-switch {

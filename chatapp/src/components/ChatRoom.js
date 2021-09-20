@@ -1,17 +1,22 @@
 import "../styles/chatRoom.css";
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { ChatMessage } from "./ChatMessage";
 import { GroupHeader } from "./GroupHeader";
+import { FormOptions } from "./FormOptions";
 import { lengthChecker, addMessage, editHtml, cEMoveCursorToEnd } from "../hooks";
 import { faPaperPlane, faBold, faItalic } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ModeContext } from "../App";
+import { Context } from "./Context";
 
 export function ChatRoom(props) {
   const location = window.location.pathname.slice(1);
   const bottom = useRef();
   const formData = useRef();
   const bold = useRef();
+
+  const { darkMode, darkModeStyles } = useContext(ModeContext);
 
   const messagesRef = props.firestore.collection("messages");
   const query = messagesRef.where("group", "==", `${window.location.pathname.slice(1)}`).limit(25);
@@ -46,13 +51,12 @@ export function ChatRoom(props) {
   const messageMonitor = (e) => {
     // setFormValue(formData.current.innerText);
     let messageSplit = formData.current.innerText.split(" ");
-    let finalWrd = messageSplit[messageSplit.length - 1];
     // console.log(messageSplit);
     textOption !== "" && editHtml(fnObj, formData, messageSplit, "editing", e);
   };
 
   return (
-    <div className="chat-room">
+    <div className="chat-room" style={{ backgroundColor: darkMode && darkModeStyles.chatColor }}>
       <GroupHeader title={location} />
       <main>
         <div>
@@ -67,36 +71,17 @@ export function ChatRoom(props) {
         </div>
         <div id="bottom" ref={bottom}></div>
       </main>
-      <form onSubmit={sendMessage} className={`${messageInfo}`}>
+      <form
+        onSubmit={sendMessage}
+        className={`${messageInfo}`}
+        style={{ backgroundColor: darkMode && darkModeStyles.chatColor }}
+      >
         <div className="form-subcontainer">
+          <Context />
           <div type="text" ref={formData} onKeyUp={(e) => messageMonitor(e)} contentEditable></div>
         </div>
         <div className={`form-options ${options && "form-options-visible"}`}>
-          <button
-            onClick={(e) => {
-              textOption === "bold"
-                ? editHtml(fnObj, formData, formData.current.innerHTML.split(" "), "text")
-                : editHtml(fnObj, formData, formData.current.innerHTML.split(" "), "bold");
-            }}
-            ref={bold}
-            type="button"
-          >
-            <FontAwesomeIcon icon={faBold} />
-          </button>
-          <button
-            onClick={(e) => {
-              textOption === "italics"
-                ? editHtml(fnObj, formData, formData.current.innerHTML.split(" "), "text")
-                : editHtml(fnObj, formData, formData.current.innerHTML.split(" "), "italics");
-            }}
-            ref={bold}
-            type="button"
-          >
-            <FontAwesomeIcon icon={faItalic} />
-          </button>
-          <button type="submit">
-            <FontAwesomeIcon icon={faPaperPlane} />
-          </button>
+          <FormOptions fnObj={fnObj} formData={formData} editHtml={editHtml} bold={bold} textOption={textOption} />
         </div>
       </form>
     </div>

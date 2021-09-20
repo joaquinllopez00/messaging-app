@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp, faWindowClose, faHashtag } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 import "../styles/groups.css";
+import { ModeContext } from "../App";
 
 export function Groups(props) {
   const groupsRef = props.firestore.collection("groups");
   const [groups] = useCollectionData(groupsRef, { idField: "id" });
   const [toggled, setToggled] = useState(true);
   const [urlPath, setUrlPath] = useState(window.location.pathname);
-  const [width, changeWidth] = useState(window.innerWidth);
+  const [width] = useState(window.innerWidth);
   const [desktop, setDesktop] = useState(true);
+  const { darkMode, darkModeStyles } = useContext(ModeContext);
+  console.log(darkModeStyles.backgroundColor, "background color");
   const detectChange = (width, changeWidth) => {
     if (window.innerWidth > 868) {
       setToggled(true);
@@ -31,7 +34,7 @@ export function Groups(props) {
   return (
     <>
       {toggled ? (
-        <div className="groups">
+        <div className="groups" style={{ backgroundColor: darkMode && darkModeStyles.backgroundColor }}>
           {desktop === false && (
             <FontAwesomeIcon
               icon={faArrowUp}
@@ -39,20 +42,19 @@ export function Groups(props) {
               onClick={() => setToggled(!toggled)}
             />
           )}
-
-          <h1>Info</h1>
-          <div className="info-tag">
-            <FontAwesomeIcon icon={faHashtag} onClick={() => setToggled(!toggled)} />
-            <p>'S</p>
+          <div className="group-content-wrapper">
+            <div className="info-tag">
+              <h2>threads</h2>
+            </div>
+            {groups &&
+              groups.map((group, id) => {
+                return (
+                  <a className="group-title" href={`/${group.title}`} key={id}>
+                    <p>#{group.title}</p>
+                  </a>
+                );
+              })}
           </div>
-          {groups &&
-            groups.map((group, id) => {
-              return (
-                <a className="group-title" href={`/${group.title}`} key={id}>
-                  <p>#{group.title}</p>
-                </a>
-              );
-            })}
         </div>
       ) : (
         <>

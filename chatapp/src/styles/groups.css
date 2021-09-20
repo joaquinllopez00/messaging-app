@@ -17,7 +17,7 @@
 .groups::before {
   content: "";
   width: 100%;
-  background-color: aliceblue;
+  /* background-color: aliceblue; */
   border-radius: 10px 0px 0px 10px;
   height: 3px;
   position: absolute;
@@ -36,6 +36,7 @@
 .group-title {
   color: rgb(171, 171, 171);
   text-decoration: none;
+  margin: 0.2rem 0rem;
 }
 
 .group-title:hover {
@@ -44,16 +45,17 @@
 
 .arrow-right {
   transform: rotate(-90deg);
-  position: fixed;
+  position: absolute;
   left: 10px;
   top: 10px;
 }
 
 .arrow-left {
   transform: rotate(90deg);
-  position: fixed;
-  top: 10px;
+  position: absolute;
+  top: 90px;
   left: 10px;
+  z-index: 999999;
 }
 
 svg {
@@ -66,6 +68,13 @@ svg {
 svg:hover {
   color: rgb(218, 218, 218);
   font-size: 22px !important;
+}
+
+.group-content-wrapper {
+  min-height: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .info-tag {

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { ModeContext } from "../App";
 import "../styles/groupHeader.css";
 
 export function GroupHeader(props) {
   const [headerToggled, setHeaderToggled] = useState(false);
-
+  const { darkMode, darkModeStyles } = useContext(ModeContext);
   const monitorScroll = () => {
     if (window.scrollY > 150 && headerToggled === false) {
       return setHeaderToggled(!headerToggled);
@@ -22,7 +23,10 @@ export function GroupHeader(props) {
   }, [headerToggled]);
 
   return (
-    <header className={`group-header ${headerToggled ? "group-toggled" : ""}`}>
+    <header
+      style={{ backgroundColor: darkMode && darkModeStyles.chatColor }}
+      className={`group-header ${headerToggled ? "group-toggled" : ""}`}
+    >
       <h2>
         {headerToggled && "#"}
         {props.title}

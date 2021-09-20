@@ -29,7 +29,7 @@ form {
   display: flex;
   flex-direction: column;
   font-size: 1.5rem;
-
+  z-index: 9999;
   margin: 0rem 1.5rem;
   background-color: white;
 }
@@ -96,46 +96,8 @@ form button {
   /* background: linear-gradient(to right, var(--user-blue) 0%, rgb(36, 36, 199) 40%, var(--recieved-blue) 90%); */
 }
 
-.form-options {
-  display: flex;
-  border-radius: 0px 10px 10px 0px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  right: 0px;
-  z-index: 9990;
-  height: 90%;
-  font-size: 18px;
-  align-items: center;
-  overflow: hidden;
-  position: absolute;
-  background-color: aliceblue;
-  transition: all 0.2s ease-in-out;
-  margin-bottom: 5px;
-}
-
-.form-options-visible {
-}
-
-.form-options button {
-  border: none;
-  background: none;
-  color: black;
-  padding: 0rem;
-  width: 30px;
-  margin: 0.3rem 0.3rem !important;
-}
-
 form > div > div > p {
   display: inline;
-}
-
-.bold {
-  font-weight: 600;
-}
-
-.italics {
-  font-style: italic;
 }
 
 #bottom {
