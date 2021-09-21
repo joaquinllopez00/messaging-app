@@ -13,8 +13,8 @@
 
 .applying-context {
   top: -105px;
-
-  background-color: rgb(231, 240, 247);
+  border-radius: 0 10px 10px 10px;
+  background-color: rgb(233, 242, 249);
 }
 
 .arrow-down {
@@ -47,11 +47,19 @@
 .context-container {
   width: 100%;
   height: 100%;
-  border: 1px solid black;
+  padding: 0.2rem;
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
+}
+
+.searching-context {
+  top: -400%;
+}
+
+.search-header {
+  font-size: 1rem;
 }
 
 .search {
@@ -63,6 +71,7 @@
 
 .search input {
   height: 30px;
+  width: 30%;
   outline: none;
   border: none;
   font-size: 1rem;
@@ -70,5 +79,68 @@
 
 .search button {
   height: 30px;
-  width: 30px;
+  width: 7%;
+}
+
+.context-results-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  height: 80%;
+}
+
+.wiki {
+  margin: 0.4rem;
+  position: relative;
+  cursor: pointer;
+}
+
+.wiki:hover {
+  background-color: aliceblue;
+  opacity: 0.6;
+}
+
+.video {
+  margin: 0.4rem;
+  position: relative;
+  cursor: pointer;
+}
+
+.video:hover {
+  background-color: aliceblue;
+  opacity: 0.6;
+}
+
+.decision {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkMark {
+  position: absolute;
+  right: 10px;
+}
+
+.checked {
+  color: aquamarine;
+}
+
+.chosen::before {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  content: " ";
+  background-color: aliceblue;
+  opacity: 0.6;
+}
+
+.decision button {
+  height: 30px;
+  width: fit-content;
+  margin: 0.3rem;
+  padding: 0.3rem;
+  border-radius: 3px;
 }

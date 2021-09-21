@@ -9,6 +9,7 @@ import { faPaperPlane, faBold, faItalic } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ModeContext } from "../App";
 import { Context } from "./Context";
+import { SearchContext } from "../context/SearchContext";
 
 export function ChatRoom(props) {
   const location = window.location.pathname.slice(1);
@@ -22,10 +23,11 @@ export function ChatRoom(props) {
   const query = messagesRef.where("group", "==", `${window.location.pathname.slice(1)}`).limit(25);
 
   const [messages] = useCollectionData(query, { idField: "id" });
-  const [formValue, setFormValue] = useState("");
   const [messageInfo, setMessageInfo] = useState("");
   const [options, setOptions] = useState(true);
   const [textOption, setTextOption] = useState("");
+  const [context, setContext] = useState(null);
+  const value = { context, setContext };
 
   let fnObj = {
     setOptions,
@@ -42,7 +44,7 @@ export function ChatRoom(props) {
     // }
     const { uid, photoURL, displayName } = props.auth.currentUser;
 
-    await addMessage(messagesRef, formVal, props.firebase.firestore, location, uid, photoURL, displayName);
+    await addMessage(messagesRef, formVal, props.firebase.firestore, location, uid, photoURL, displayName, context);
     formVal.innerHTML = "";
     setTextOption("");
     bottom.current.scrollIntoView({ behavior: "smooth" });
@@ -77,7 +79,9 @@ export function ChatRoom(props) {
         style={{ backgroundColor: darkMode && darkModeStyles.chatColor }}
       >
         <div className="form-subcontainer">
-          <Context />
+          <SearchContext.Provider value={value}>
+            <Context />
+          </SearchContext.Provider>
           <div type="text" ref={formData} onKeyUp={(e) => messageMonitor(e)} contentEditable></div>
         </div>
         <div className={`form-options ${options && "form-options-visible"}`}>

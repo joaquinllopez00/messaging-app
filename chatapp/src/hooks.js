@@ -1,3 +1,6 @@
+import { getVideoData, getWiki } from "./api";
+import axios from "axios";
+
 export const lengthChecker = (val, func) => {
   func("error");
   setTimeout(() => {
@@ -6,7 +9,7 @@ export const lengthChecker = (val, func) => {
   return;
 };
 
-export const addMessage = async (ref, val, store, loc, uid, photoURL, displayName) => {
+export const addMessage = async (ref, val, store, loc, uid, photoURL, displayName, context) => {
   val.childNodes.forEach((el) => {
     el.contentEditable = false;
   });
@@ -18,6 +21,7 @@ export const addMessage = async (ref, val, store, loc, uid, photoURL, displayNam
     uid,
     photoURL,
     displayName,
+    context,
   });
 };
 
@@ -57,6 +61,37 @@ export const cEMoveCursorToEnd = (data) => {
   sel.addRange(range);
 };
 
-export const searchForContext = (search) => {
-  console.log(search);
+export const extractContent = (s) => {
+  let span = document.createElement("span");
+  span.innerHTML = s.data;
+  return span.textContent;
 };
+
+export const searchForContext = async (search, searched, setSearched) => {
+  setSearched(!searched);
+  console.log(search);
+  const wiki = await getWiki(search);
+  const finWiki = extractContent(wiki);
+  const vid = await getVideoData(1, search);
+  return {
+    wiki: finWiki,
+    vid: vid.items[0],
+  };
+  // const vid = await getVideoData(1, search);
+  // return {
+  //   wiki,
+  //   vid
+  // }
+};
+
+// vid.items[0]
+
+// .id.videoId
+
+// .snippet.title
+
+// .snippet.channelTitle
+
+// .snippet.description
+
+// .snippet.thumbnails.default
