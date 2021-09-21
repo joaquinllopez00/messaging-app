@@ -9,6 +9,7 @@ import { Results } from "./Results";
 export function Context() {
   const [toggled, setToggled] = useState(false);
   const [textIn, setTextIn] = useState("");
+  const [linkKey, setLinkKey] = useState("");
   const [searched, setSearched] = useState(false);
   const [tempContext, setTempContext] = useState(null);
   const { context, setContext } = useContext(SearchContext);
@@ -16,8 +17,21 @@ export function Context() {
   const handleSearch = async () => {
     const data = await searchForContext(textIn, searched, setSearched);
     console.log(data);
+    setLinkKey(textIn.split(" ").join("_"));
     setContext(data);
     setTempContext(data);
+  };
+
+  const generateToggleVal = (c) => {
+    let type;
+    c === "wiki" && (type = `https://en.wikipedia.com/wiki/${linkKey}`);
+    c === "vid" && (type = `https://www.youtube.com/watch?v=${context.vid.id.videoId}`);
+    console.log(type, c);
+    return (
+      <a href={type} rel="noopener noreferrer" target="_blank">
+        {c}
+      </a>
+    );
   };
 
   // .id.videoId
@@ -45,7 +59,7 @@ export function Context() {
           {!toggled &&
             (context ? (
               Object.keys(context).map((c) => {
-                return <p>{c}</p>;
+                return generateToggleVal(c);
               })
             ) : (
               <p>Apply Context</p>
