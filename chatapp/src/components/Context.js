@@ -15,7 +15,6 @@ export function Context() {
   const { context, setContext } = useContext(SearchContext);
 
   useEffect(() => {
-    let savedContext = JSON.parse(window.localStorage.getItem("threads-context"));
     let savedInitContext = JSON.parse(window.localStorage.getItem("threads-initialContext"));
     if (savedInitContext) {
       setContext(savedInitContext);

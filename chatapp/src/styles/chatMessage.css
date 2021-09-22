@@ -4,9 +4,7 @@
   border-radius: 10px;
   text-align: left;
   font-family: var(--font-stack);
-}
-
-.message > div {
+  position: relative;
 }
 
 .message p {
