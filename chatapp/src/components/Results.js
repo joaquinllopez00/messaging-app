@@ -5,7 +5,7 @@ import { useState } from "react";
 export function Results(props) {
   let { searched, setSearched, setToggled, toggled, textIn, tempContext, setTempContext, setContext, context } = props;
   const [savedContext, setSavedContext] = useState(tempContext);
-
+  console.log(tempContext, "tempContext", "+", tempContext.wiki);
   const handleSave = (val, key) => {
     let newVal = {
       ...context,
@@ -19,19 +19,17 @@ export function Results(props) {
         delete newVal.vid;
       }
       // setSavedContext(newVal);
-      console.log(newVal);
-      setContext(newVal);
-      return;
     }
     // setSavedContext(newVal);
-    console.log(newVal, "newABAL*EIA");
+
     setContext(newVal);
+    window.localStorage.setItem("threads-context", JSON.stringify(newVal));
   };
 
   const handleSubmitContext = (e) => {
-    console.log(toggled, searched);
     setToggled(!toggled);
     setSearched(!searched);
+    localStorage.setItem("threads-context", JSON.stringify(context));
   };
 
   return (

@@ -1,5 +1,5 @@
 import "../styles/chatRoom.css";
-import { useState, useRef, useContext } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { ChatMessage } from "./ChatMessage";
 import { GroupHeader } from "./GroupHeader";

@@ -1,6 +1,6 @@
 import { faAngleDoubleDown, faAngleDoubleUp, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { SearchContext } from "../context/SearchContext";
 import { searchForContext, extractContent } from "../hooks";
 import "../styles/context.css";
@@ -14,19 +14,29 @@ export function Context() {
   const [tempContext, setTempContext] = useState(null);
   const { context, setContext } = useContext(SearchContext);
 
+  useEffect(() => {
+    let savedContext = JSON.parse(window.localStorage.getItem("threads-context"));
+    let savedInitContext = JSON.parse(window.localStorage.getItem("threads-initialContext"));
+    if (savedInitContext) {
+      setContext(savedInitContext);
+      setTempContext(savedInitContext);
+    }
+  }, []);
+
   const handleSearch = async () => {
     const data = await searchForContext(textIn, searched, setSearched);
     console.log(data);
     setLinkKey(textIn.split(" ").join("_"));
     setContext(data);
     setTempContext(data);
+    window.localStorage.setItem("threads-initialContext", JSON.stringify(data));
   };
 
   const generateToggleVal = (c) => {
     let type;
     c === "wiki" && (type = `https://en.wikipedia.com/wiki/${linkKey}`);
     c === "vid" && (type = `https://www.youtube.com/watch?v=${context.vid.id.videoId}`);
-    console.log(type, c);
+    // console.log(type, c);
     return (
       <a href={type} rel="noopener noreferrer" target="_blank">
         {c}

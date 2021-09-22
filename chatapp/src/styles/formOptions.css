@@ -13,8 +13,7 @@
   justify-content: flex-start;
 
   align-items: center;
-  right: 0px;
-
+  right: 3%;
   z-index: 9990;
   top: 0;
   font-size: 18px;
@@ -51,7 +50,7 @@
 }
 
 .form-options:hover {
-  top: -90px;
+  top: -60px;
 }
 
 .extra-options {
