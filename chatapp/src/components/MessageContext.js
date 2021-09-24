@@ -21,7 +21,10 @@ export function MessageContext(props) {
           <div className="mc-info">
             <div className={`${option}`}>
               {option === "wiki" ? (
-                <p>{context[option]}</p>
+                <>
+                  <p>{context[option]}</p>
+                  <a href={`www.google.com`}>Link</a>
+                </>
               ) : (
                 <div>
                   <p>{context.vid.snippet.title}</p>

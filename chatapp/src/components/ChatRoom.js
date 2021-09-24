@@ -51,9 +51,7 @@ export function ChatRoom(props) {
   };
 
   const messageMonitor = (e) => {
-    // setFormValue(formData.current.innerText);
     let messageSplit = formData.current.innerText.split(" ");
-    // console.log(messageSplit);
     textOption !== "" && editHtml(fnObj, formData, messageSplit, "editing", e);
   };
 
