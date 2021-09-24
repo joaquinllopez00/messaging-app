@@ -12,7 +12,7 @@ export function MessageContext(props) {
           {Object.keys(context).map((c) => {
             return (
               <button onClick={() => setOption(c)} className={option === c && "btn-toggled"}>
-                {c}
+                {c === "wiki" ? "Wikipedia" : "Video"}
               </button>
             );
           })}
