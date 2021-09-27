@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { MessageContext } from "./MessageContext";
 
 import { UserHeader } from "./UserHeader";
+import { MessageOptions } from "./MessageOptions";
 
 export function ChatMessage(props) {
   const { text, uid, photoURL, context } = props.message;
@@ -17,15 +18,16 @@ export function ChatMessage(props) {
       {context ? (
         <>
           {toggled ? (
-            <MessageContext context={context} />
+            <>
+              <MessageOptions setToggled={setToggled} toggled={toggled} type={messageClass} />
+              <MessageContext context={context} setToggled={setToggled} />
+            </>
           ) : (
-            <p className="mc-view" onClick={() => setToggled(!toggled)}>
-              View Context
-            </p>
+            <MessageOptions setToggled={setToggled} toggled={toggled} type={messageClass} />
           )}
         </>
       ) : (
-        " "
+        <MessageOptions context="false" />
       )}
     </div>
   );

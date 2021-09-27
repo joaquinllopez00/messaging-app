@@ -1,0 +1,24 @@
+.mo-container {
+  position: absolute;
+  top: 15px;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.3;
+  transition: all 0.2s ease-in;
+}
+
+.mo-container:hover {
+  opacity: 1;
+}
+
+.mo-options {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mo-options svg {
+  color: black;
+}
