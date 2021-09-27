@@ -10,6 +10,13 @@
   /* transform: translateZ(0); */
 }
 
+@media screen and (max-width: 720px) {
+  .chat-room {
+    width: 100%;
+    margin: 0;
+  }
+}
+
 main {
   min-height: 100vh;
   width: 100%;

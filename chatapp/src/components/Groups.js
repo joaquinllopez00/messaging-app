@@ -16,7 +16,7 @@ export function Groups(props) {
   const { darkMode, darkModeStyles } = useContext(ModeContext);
   console.log(darkModeStyles.backgroundColor, "background color");
   const detectChange = (width, changeWidth) => {
-    if (window.innerWidth > 868) {
+    if (window.innerWidth > 720) {
       setToggled(true);
       setDesktop(true);
     } else {
