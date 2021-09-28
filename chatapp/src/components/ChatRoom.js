@@ -66,7 +66,13 @@ export function ChatRoom(props) {
                 return el1.createdAt - el2.createdAt;
               })
               .map((msg, idx) => (
-                <ChatMessage auth={props.auth} key={msg.id} message={msg} style={idx === 0 ? "margin-top: 4rem" : ""} />
+                <ChatMessage
+                  auth={props.auth}
+                  key={msg.id}
+                  message={msg}
+                  firestore={props.firestore}
+                  style={idx === 0 ? "margin-top: 4rem" : ""}
+                />
               ))}
         </div>
         <div id="bottom" ref={bottom}></div>
