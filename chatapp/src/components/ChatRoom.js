@@ -16,8 +16,16 @@ export function ChatRoom(props) {
   const bottom = useRef();
   const formData = useRef();
   const bold = useRef();
-
   const { darkMode, darkModeStyles } = useContext(ModeContext);
+
+  useEffect(() => {
+    let msg = JSON.parse(window.localStorage.getItem("threads-message"));
+    console.log(msg);
+    if (msg) {
+      console.log(msg, "msg");
+      formData.current.innerHTML = msg.msg;
+    }
+  }, []);
 
   const messagesRef = props.firestore.collection("messages");
   const query = messagesRef.where("group", "==", `${window.location.pathname.slice(1)}`).limit(25);
@@ -50,9 +58,18 @@ export function ChatRoom(props) {
     bottom.current.scrollIntoView({ behavior: "smooth" });
   };
 
+  var timeout = null;
   const messageMonitor = (e) => {
     let messageSplit = formData.current.innerText.split(" ");
     textOption !== "" && editHtml(fnObj, formData, messageSplit, "editing", e);
+    let msg = formData.current.innerHTML;
+    console.log(msg);
+    if (timeout !== null) {
+      clearTimeout(timeout);
+    }
+    timeout = setTimeout(() => {
+      window.localStorage.setItem("threads-message", JSON.stringify({ msg }));
+    }, 3000);
   };
 
   return (
