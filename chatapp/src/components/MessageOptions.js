@@ -9,19 +9,28 @@ export function MessageOptions(props) {
   console.log(context === "false", "context !== false in mo");
 
   const handleDelete = async (type, content) => {
-    console.log(type, content.id, firestore);
+    // console.log(type, content.id, firestore);
     const docRef = firestore.collection("messages").doc(content.id);
-    console.log(docRef);
+    // console.log(docRef);
     const res = await docRef.delete();
 
-    console.log(res, "response");
+    // console.log(res, "response");
+  };
+
+  const handleEdit = (e) => {
+    console.log(e.target.parentElement.parentElement.parentElement.children[1]);
   };
 
   return (
     <div className="mo-container">
       {type === "sent" && (
         <div className="mo-options">
-          <FontAwesomeIcon icon={faEdit} />
+          <FontAwesomeIcon
+            icon={faEdit}
+            onClick={(e) => {
+              handleEdit(e);
+            }}
+          />
           <FontAwesomeIcon
             icon={faTrashAlt}
             onClick={() => {

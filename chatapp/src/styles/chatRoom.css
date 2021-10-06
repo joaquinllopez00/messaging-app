@@ -110,3 +110,12 @@ form > div > div > p {
 #bottom {
   margin: 1.5rem 0 !important;
 }
+
+.rc-menu {
+  display: none;
+  position: absolute;
+  margin: 0 !important;
+}
+.rc-menu.shown {
+  display: block;
+}

@@ -18,13 +18,25 @@ export function ChatRoom(props) {
   const bold = useRef();
   const { darkMode, darkModeStyles } = useContext(ModeContext);
 
+  const createCustomMenu = () => {
+    document.addEventListener("contextmenu", (e) => {
+      let menu = document.querySelector(".rc-menu");
+
+      if (document.querySelector(".chat-room").contains(e.target)) {
+      }
+      e.preventDefault();
+    });
+  };
+
   useEffect(() => {
     let msg = JSON.parse(window.localStorage.getItem("threads-message"));
-    console.log(msg);
+
     if (msg) {
-      console.log(msg, "msg");
       formData.current.innerHTML = msg.msg;
     }
+
+    //create custom user menu
+    // createCustomMenu();
   }, []);
 
   const messagesRef = props.firestore.collection("messages");
@@ -93,6 +105,10 @@ export function ChatRoom(props) {
               ))}
         </div>
         <div id="bottom" ref={bottom}></div>
+        <div className="rc-menu">
+          <p>Copy</p>
+          <p>Reply</p>
+        </div>
       </main>
       <form
         onSubmit={sendMessage}
