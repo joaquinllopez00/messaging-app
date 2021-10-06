@@ -67,6 +67,10 @@ export function ChatRoom(props) {
     await addMessage(messagesRef, formVal, props.firebase.firestore, location, uid, photoURL, displayName, context);
     formVal.innerHTML = "";
     setTextOption("");
+    setContext(null);
+    window.localStorage.removeItem("threads-context");
+    window.localStorage.removeItem("threads-initialContext");
+    window.localStorage.removeItem("threads-message");
     bottom.current.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -117,7 +121,7 @@ export function ChatRoom(props) {
       >
         <div className="form-subcontainer">
           <SearchContext.Provider value={value}>
-            <Context />
+            <Context tempContext={null} />
           </SearchContext.Provider>
           <div type="text" ref={formData} onKeyUp={(e) => messageMonitor(e)} contentEditable></div>
         </div>

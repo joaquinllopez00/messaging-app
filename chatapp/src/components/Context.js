@@ -6,16 +6,17 @@ import { searchForContext, extractContent } from "../hooks";
 import "../styles/context.css";
 import { Results } from "./Results";
 
-export function Context() {
+export function Context(props) {
   const [toggled, setToggled] = useState(false);
   const [textIn, setTextIn] = useState("");
   const [linkKey, setLinkKey] = useState("");
   const [searched, setSearched] = useState(false);
-  const [tempContext, setTempContext] = useState(null);
+  const [tempContext, setTempContext] = useState(props.tempContext);
   const { context, setContext } = useContext(SearchContext);
 
   useEffect(() => {
     let savedInitContext = JSON.parse(window.localStorage.getItem("threads-initialContext"));
+    console.log(tempContext, "tempContext");
     if (savedInitContext) {
       setContext(savedInitContext);
       setTempContext(savedInitContext);
@@ -78,7 +79,7 @@ export function Context() {
 
       {toggled && (
         <>
-          {tempContext ? (
+          {tempContext && context ? (
             <Results
               tempContext={tempContext}
               textIn={textIn}

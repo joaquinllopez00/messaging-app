@@ -9,6 +9,7 @@ import { MessageOptions } from "./MessageOptions";
 export function ChatMessage(props) {
   const { text, uid, photoURL, context } = props.message;
   const { firestore } = props;
+  console.log(firestore, "firestore in chatmessage");
   const [toggled, setToggled] = useState(false);
   const auth = props.auth;
   const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
@@ -35,7 +36,7 @@ export function ChatMessage(props) {
           )}
         </>
       ) : (
-        <MessageOptions context="false" type={messageClass} />
+        <MessageOptions context="false" type={messageClass} firestore={firestore} message={props.message} />
       )}
     </div>
   );
